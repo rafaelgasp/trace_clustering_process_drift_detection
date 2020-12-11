@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 from tqdm import tqdm_notebook
-from celluloid import Camera
 from .drift_detection import get_metrics
 import matplotlib
     
