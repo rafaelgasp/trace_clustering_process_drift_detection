@@ -55,7 +55,7 @@ def plot_deteccao_drift(
             ax.axvline(x=val, ls='-.', lw=4, c='#deb100', alpha=0.8)
 
     metrics = get_metrics(detected_drifts, y_true, cluster_window_size)
-    print(metrics)
+    # print(metrics)
     # plt.title("Precision: {}  Recall: {}  F1: {}  Delay:{}".format(
     #     "{0:.2f}%".format(metrics["Precision"]* 100),
     #     "{0:.2f}%".format(metrics["Recall"]* 100),

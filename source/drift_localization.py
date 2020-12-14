@@ -31,6 +31,21 @@ def localize_drift(before_drift_centroids, after_drift_centroids, col_names):
     
     resp = pd.DataFrame([
         ((before_drift_centroids - after_drift_centroids[lut]) ** 2).mean(axis=0)
-    ], columns=col_names).transpose()
+    ], columns=col_names).transpose().sort_values(0, ascending=False)
     
     return resp
+
+
+def localize_all_drifts(run_df, drifts, cluster_window_size, col_names):
+    drifts_localization = []
+
+    for i in range(len(drifts)):
+        drifts_localization.append(
+            localize_drift(
+                run_df.centroids.loc[drifts[i] - cluster_window_size], 
+                run_df.centroids.loc[drifts[i]], 
+                col_names
+            ).rename(columns={0: 'drift_'+str(drifts[i])})
+        )
+    
+    return pd.concat(drifts_localization, axis=1)

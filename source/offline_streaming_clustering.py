@@ -218,7 +218,7 @@ def compare_clusterings(resp_1, resp_2, cols=None):
     return r
 
 def run_offline_clustering_window(
-    model, window, df, sliding_window=False, sliding_step=5, reuse_centers=False
+    model, window, df, sliding_window=False, sliding_step=5
 ):
     """
         Roda o modelo de clusterização offline baseado em janelas
@@ -245,7 +245,7 @@ def run_offline_clustering_window(
         # loop = tqdm_notebook(range(0, len(df), window))
         loop = range(0, len(df), window)
 
-    prev_centers = None
+    # prev_centers = None
     for i in loop:
         # print(i)
         # Seleciona janela olhando para frente
@@ -256,11 +256,11 @@ def run_offline_clustering_window(
         # model.fit(X)
         # y_pred = model.labels_
 
-        if reuse_centers and prev_centers is not None:
-            model.set_params(**{
-                'init': prev_centers,
-                'n_init': 1
-            })
+        # if reuse_centers and prev_centers is not None:
+        #     model.set_params(**{
+        #         'init': prev_centers,
+        #         'n_init': 1
+        #     })
 
         y_pred = model.fit_predict(X)
         
@@ -354,7 +354,7 @@ def run_offline_clustering_window(
         # Adiciona iteração atual na resposta
         resp.append(r)
 
-        prev_centers = centers
+        # prev_centers = centers
 
     run_df = pd.DataFrame(resp).set_index("i")
 
@@ -390,4 +390,7 @@ def run_offline_clustering_window(
     measures_df = pd.DataFrame(measures).set_index("i")
     measures_df.fillna(0, inplace=True)
 
-    return run_df, measures_df
+    all_metrics = run_df.join(measures_df)
+    all_metrics.index += all_metrics.index[1]
+
+    return all_metrics
