@@ -18,7 +18,7 @@ def get_traces_as_tokens(traces_df, col_ref="Activity"):
             C         | 2019-09-01
             END-A     | 2019-09-01
             
-       into: "START A B C END-A"         
+       into: "START A B C END-A"  
     """
     return traces_df.groupby("Trace_order")[col_ref].apply(
         lambda x: " ".join(x.values)
@@ -27,7 +27,14 @@ def get_traces_as_tokens(traces_df, col_ref="Activity"):
 def get_count_representation(tokens, binary=True, tfidf=False, ngram_range=(1, 1)):
     """
         Generic method to represent traces as vectors by counting
-        activities or transitions
+        activities or transitions.
+
+        Parameters:
+        ------------
+            tokens (pd.Series): Trace represented as tokens (series of strings)
+            binary (bool): Count binary or frequency
+            tfidf (bool): Use tf-idf to normalize frequency
+            ngram_range (tuple): Range of ngrams to obtain representation
     """
     
     if tfidf:

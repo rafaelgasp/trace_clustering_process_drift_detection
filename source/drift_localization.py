@@ -12,6 +12,7 @@ def localize_drift(before_drift_centroids, after_drift_centroids, col_names):
         assignment problem. Naval Research Logistics Quarterly, 2:83-97, 1955`
 
         Parameters:
+        ------------
             before_drift_centroids (pd.DataFrame): Centroids before the drift
             after_drift_centroids (pd.DataFrame): Centroids after the drift
             col_names (list): List with the names of the columns relating to 
@@ -19,6 +20,7 @@ def localize_drift(before_drift_centroids, after_drift_centroids, col_names):
                 or transitions)
             
         Returns:
+        --------
             pd.DataFrame: DataFrame with the MSE of each dimension 
     """
     if isinstance(before_drift_centroids, pd.Series):
@@ -36,16 +38,28 @@ def localize_drift(before_drift_centroids, after_drift_centroids, col_names):
     return resp
 
 
-def localize_all_drifts(run_df, drifts, cluster_window_size, col_names):
+def localize_all_drifts(run_df, drifts_found, cluster_window_size, col_names):
+    """
+        Performs drift localization for all drifts found and returns a DataFrame
+        (n_dimensions x n_drifts_founds).
+
+        Parameters: 
+        ------------
+            run_df (pd.DataFrame): Result of the trace clustering step, with the
+                centroids for each trace window
+            drifts_found (list): List of index of the found drifts to be localized
+            cluster_window_size (int): Size of the trace clustering window
+            col_names (list): Name of the dimensions in the vector space representation
+    """
     drifts_localization = []
 
-    for i in range(len(drifts)):
+    for i in range(len(drifts_found)):
         drifts_localization.append(
             localize_drift(
-                run_df.centroids.loc[drifts[i] - cluster_window_size], 
-                run_df.centroids.loc[drifts[i]], 
+                run_df.centroids.loc[drifts_found[i] - cluster_window_size], 
+                run_df.centroids.loc[drifts_found[i]], 
                 col_names
-            ).rename(columns={0: 'drift_'+str(drifts[i])})
+            ).rename(columns={0: 'drift_at_'+str(drifts_found[i])})
         )
     
     return pd.concat(drifts_localization, axis=1)

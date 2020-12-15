@@ -4,7 +4,8 @@ import xml.etree.ElementTree as ET
 
 def process_instance(el):
     """
-        Process each process instance and returns dict
+        Process each 'process instance' element from the .mxml file
+        and returns as dict
     """
     resp = []
     for entry in el[1:]:
@@ -76,19 +77,3 @@ def all_prep(file, aliases=None, replace_whitespaces="_"):
     df["Trace_order"] = cumulative_counting(df["TraceId"])
     
     return df
-
-
-def split_drift_log(mxml_df, split_rate=0.1):
-    """
-        Splits the log every 10% of the size
-    """
-    tamanho = int(len(mxml_df.Trace_order.unique()) * split_rate)
-    
-    mxml_df["drift_log"] = mxml_df.Trace_order.apply(
-        lambda x: (x // tamanho) % 2
-    )
-    
-    normal_log = mxml_df[mxml_df["drift_log"] == 0]
-    drift_log = mxml_df[mxml_df["drift_log"] == 1]
-    
-    return normal_log, drift_log

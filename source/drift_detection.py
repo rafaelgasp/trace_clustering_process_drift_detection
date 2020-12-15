@@ -12,12 +12,14 @@ def get_metrics(drifts: list, resp: list, window_size=100, verbose=False) -> dic
     correctly when it has been found within 2 * window_size after its true index. 
 
     Parameters:
+    ------------
         drifts (list): List with the index of the detected drifts
         resp (list): List with the index of the ground truth drifts
         window_size (int): Size of the trace clustering window used to consider the delay.
         verbose (bool): Whether to print results
 
     Returns:
+    ---------
         dict: dictionary with the value of each metric
     """
     # Initialize metrics with 0
@@ -84,6 +86,7 @@ def detect_concept_drift(
         current index lies outside of the boundaries. 
 
         Parameters:
+        ------------
             df (pd.DataFrame): DataFrame of features from tracking the trace clusterings
             var_ref (str): Name of the feature to apply the algorithm. It has to be present
                 in the df.columns
@@ -99,6 +102,7 @@ def detect_concept_drift(
             verbose (bool): Whether to print the index of drifts as they are found
         
         Returns:
+        ---------
             list: List of index of the detected drifts
             dict: Dictionary with the rolling average, lowers and uppers boundaries 
                 to assist plotting
