@@ -275,7 +275,7 @@ def run_offline_clustering_window(
             pass
 
     # Calculate time-dependent features
-    measures = [compare_clusterings(resp[i], resp[i + 1], df.columns) for i in range(len(resp) - 1)]
+    measures = [compare_clusterings(resp[i], resp[i + 1]) for i in range(len(resp) - 1)]
     measures_df = pd.DataFrame(measures).set_index("i")
     measures_df.fillna(0, inplace=True)
 
