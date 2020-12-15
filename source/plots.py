@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import matplotlib
 
 
 def plot_drift_vertical_lines(log_size, resp_drift=None, label="Concept drift ground truth", lw=3, alpha=0.9):
@@ -78,7 +77,7 @@ def plot_deteccao_drift(
             
     for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] +
                  ax.get_xticklabels() + ax.get_yticklabels()):
-        item.set_fontsize(30)]
+        item.set_fontsize(30)
 
 
     leg = plt.legend(fontsize=32, loc='upper center', bbox_to_anchor=(0.48, -0.15),
