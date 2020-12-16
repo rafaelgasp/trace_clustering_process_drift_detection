@@ -188,6 +188,8 @@ def run_offline_clustering_window(
     else:
         loop = range(0, len(df), window)
 
+    col_names = df.columns
+
     for i in loop:
         # Selects traces inside the window
         X = df.loc[i : i + window - 1].values

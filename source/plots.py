@@ -55,7 +55,7 @@ def plot_deteccao_drift(
     ax.plot(run_df.index, run_df[col], c='#ff5f54', lw=5, label=col)
     
     ax.plot(run_df.index, rolling_means, c='#35b588', linestyle='-', lw=4, marker='.', markeredgewidth=4, label="Rolling average")
-    ax.fill_between(run_df.index, lowers, uppers, facecolor='#52arun_dff', alpha=0.1, label="Tolerance boundaries")
+    ax.fill_between(run_df.index, lowers, uppers, facecolor='#52adff', alpha=0.1, label="Tolerance boundaries")
     ax.plot(run_df.index, uppers, c='#52adff', alpha=0.5, marker='v', markeredgewidth=4)
     ax.plot(run_df.index, lowers, c='#52adff', alpha=0.5, marker='^', markeredgewidth=4)
 
