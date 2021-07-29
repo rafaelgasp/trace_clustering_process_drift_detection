@@ -32,3 +32,5 @@ The dataset utilized in this work is presented in `Maaradji, A., Dumas, M., La R
 
 
 ## Citing this work
+
+Rafael Gaspar de Sousa, Sarajane Marques Peres, Marcelo Fantinato, and Hajo Alexander Reijers. 2021. Concept drift detection and localization in process mining: an integrated and efficient approach enabled by trace clustering. In Proceedings of the 36th Annual ACM Symposium on Applied Computing (SAC '21). Association for Computing Machinery, New York, NY, USA, 364–373. DOI:https://doi.org/10.1145/3412841.3441918
